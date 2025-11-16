@@ -1,3 +1,6 @@
+import {Entity} from "./entity";
+import {Status} from "./status";
+
 class Product {
   constructor(name, price, purchased) {
     this.name = name;
@@ -5,11 +8,12 @@ class Product {
   }
 }
 
-class CartProduct {
-  constructor(product, quantity, purchased) {
-    this.product = product;
-    this.quantity = quantity;
-    this.purchased = purchased;
+class Order extends Entity {
+  constructor(id, products, status, date) {
+    super(id)
+    this.products = products;
+    this.status = status;
+    this.updateDate = date;
   }
 }
 
