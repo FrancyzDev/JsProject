@@ -4,15 +4,15 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>StyleClothes - Інтернет-магазин одягу</title>
+  <title>Style - Інтернет-магазин взуття</title>
   <link rel="stylesheet" href="css/style.css">
-  <meta name="description" content="Інтернет-магазин одягу StyleClothes - кращі ціни на брендовi речi">
+  <meta name="description" content="Інтернет-магазин взуття Style - кращі ціни на брендове взуття">
 
-  <meta property="og:title" content="StyleClothes - Інтернет-магазин одягу">
+  <meta property="og:title" content="Style - Інтернет-магазин взуття">
   <meta property="og:type" content="website">
   <meta property="og:url" content="">
   <meta property="og:image" content="">
-  <meta property="og:image:alt" content="StyleClothes">
+  <meta property="og:image:alt" content="Style">
 
   <link rel="icon" href="/favicon.ico" sizes="any">
   <link rel="icon" href="/icon.svg" type="image/svg+xml">
@@ -20,135 +20,6 @@
 
   <link rel="manifest" href="site.webmanifest">
   <meta name="theme-color" content="#fafafa">
-
-  <style>
-    .cart-modal {
-      display: none;
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0,0,0,0.5);
-      z-index: 1000;
-    }
-
-    .cart-content {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      background: white;
-      padding: 20px;
-      border-radius: 10px;
-      width: 90%;
-      max-width: 500px;
-      max-height: 80vh;
-      overflow-y: auto;
-    }
-
-    .cart-total {
-      font-size: 1.2em;
-      font-weight: bold;
-      margin-top: 20px;
-      text-align: right;
-    }
-
-    .close-cart {
-      float: right;
-      background: none;
-      border: none;
-      font-size: 1.5em;
-      cursor: pointer;
-    }
-
-    .add-to-cart {
-      background: #007bff;
-      color: white;
-      border: none;
-      padding: 10px 15px;
-      border-radius: 5px;
-      cursor: pointer;
-      margin-top: 10px;
-      width: 100%;
-    }
-
-    .cart-count {
-      background: #ff4444;
-      color: white;
-      border-radius: 50%;
-      padding: 2px 6px;
-      font-size: 0.8em;
-      margin-left: 5px;
-    }
-
-    .form-group label {
-      display: block;
-      margin-bottom: 8px;
-      font-weight: bold;
-    }
-
-    .form-group input {
-      width: 100%;
-      padding: 12px;
-      border: 1px solid #ddd;
-      border-radius: 5px;
-      font-size: 16px;
-      box-sizing: border-box;
-    }
-
-    .product-card {
-      border: 1px solid #eee;
-      border-radius: 10px;
-      padding: 15px;
-      background: white;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-      display: flex;
-      flex-direction: column;
-      height: 100%;
-    }
-
-    .product-image {
-      width: 100%;
-      height: 250px; /* Фіксована висота для всіх карток */
-      overflow: hidden;
-      border-radius: 5px;
-      margin-bottom: 15px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      background-color: #f8f9fa;
-      position: relative;
-    }
-
-    .product-image img {
-      max-width: 100%;
-      max-height: 100%;
-      width: auto;
-      height: auto;
-      object-fit: contain;
-      object-position: center;
-    }
-
-    .product-title {
-      font-size: 1.1em;
-      margin-bottom: 10px;
-      font-weight: bold;
-      flex-grow: 1;
-    }
-
-    .product-price {
-      color: #28a745;
-      font-weight: bold;
-      margin-bottom: 15px;
-      font-size: 1.2em;
-    }
-
-    .product-price {
-      color: #28a745;
-      font-weight: bold;
-    }
-  </style>
 </head>
 
 <body>
@@ -157,22 +28,12 @@
 <header class="header">
   <div class="container">
     <div class="header-content">
-      <div class="logo">StyleClothes</div>
-
-      <nav class="nav">
-        <ul class="nav-list">
-          <li><a href="index.html" class="nav-link">Головна</a></li>
-          <li><a href="#" class="nav-link">Каталог</a></li>
-          <li><a href="#" class="nav-link">Про нас</a></li>
-          <li><a href="#" class="nav-link">Контакти</a></li>
-          <li><a href="admin.html" class="nav-link">Адмiн меню</a></li>
-        </ul>
-      </nav>
+      <a class="logo" href="index.html">Style</a>
 
       <div class="header-actions">
-        <button class="btn btn-primary" id="cartButton">
+        <a href="order.html" class="btn btn-primary" id="cartButton">
           Кошик <span id="cartCount" class="cart-count">0</span>
-        </button>
+        </a>
       </div>
     </div>
   </div>
@@ -181,9 +42,8 @@
 <!-- Hero Section -->
 <section class="hero">
   <div class="container">
-    <h1 class="hero-title">Стильний одяг вже сьогодi</h1>
-    <p class="hero-subtitle">Найновіші брендовi речi та аксесуари за найкращими цінами</p>
-    <button class="btn btn-primary">Перейти до каталогу</button>
+    <h1 class="hero-title">Стильне взуття вже сьогодi</h1>
+    <p class="hero-subtitle">Найновіші брендове взуття за найкращими цінами</p>
   </div>
 </section>
 
@@ -195,17 +55,6 @@
     </div>
   </div>
 </section>
-
-<!-- Модальне вікно кошика -->
-<div id="cartModal" class="cart-modal">
-  <div class="cart-content">
-    <button class="close-cart">&times;</button>
-    <h2>🛒 Ваш кошик</h2>
-    <div id="cartItems"></div>
-    <div class="cart-total" id="cartTotal">Загальна сума: 0 ₴</div>
-    <button class="btn btn-primary" style="width: 100%; margin-top: 20px;">Оформити замовлення</button>
-  </div>
-</div>
 
 <!-- Features -->
 <section class="features">
@@ -237,24 +86,15 @@
   <div class="container">
     <div class="footer-content">
       <div class="footer-section">
-        <h3>StyleClothes</h3>
-        <p>Інтернет-магазин одягу №1 в Україні</p>
-      </div>
-
-      <div class="footer-section">
-        <h3>Категорії</h3>
-        <ul class="footer-links">
-          <li><a href="#">Одяг</a></li>
-          <li><a href="#">Взуття</a></li>
-          <li><a href="#">Аксесуари</a></li>
-        </ul>
+        <h3>Style</h3>
+        <p>Інтернет-магазин взуття №1 в Україні</p>
       </div>
 
       <div class="footer-section">
         <h3>Контакти</h3>
         <ul class="footer-links">
           <li><a href="#">+380 44 123 4567</a></li>
-          <li><a href="#">info@StyleClothes.ua</a></li>
+          <li><a href="#">info@Style.ua</a></li>
           <li><a href="#">Одеса, вул. Мальцева, 1</a></li>
         </ul>
       </div>
@@ -271,30 +111,7 @@
   </div>
 </footer>
 
-<script>
-loadProducts();
-
-function loadProducts() {
-  productsList = document.getElementById('productsList');
-  const products = JSON.parse(localStorage.getItem('products')) || [];
-
-  productsList.innerHTML = '';
-
-  products.forEach(product => {
-    const productCard = document.createElement('div');
-    productCard.className = 'product-card';
-    productCard.innerHTML = `
-        <div class="product-image">
-        <img alt="${product.name}" src="${product.image_url}">
-        </div>
-        <h3 class="product-title">${product.name}</h3>
-        <div class="product-price">${product.price} ₴</div>
-        <button class="add-to-cart" data-product="${product.name}" data-price="${product.price}">Додати до кошика</button>
-        `;
-    productsList.appendChild(productCard);
-  });
-}
-</script>
+<script src="js/app.js" type="module"></script>
 </body>
 
 </html>

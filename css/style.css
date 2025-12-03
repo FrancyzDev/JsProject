@@ -1,8 +1,15 @@
-/* Базові стилі */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body.modal-open {
+  overflow: hidden;
 }
 
 body {
@@ -18,7 +25,6 @@ body {
   padding: 0 20px;
 }
 
-/* Header */
 .header {
   background: #2c3e50;
   color: white;
@@ -38,6 +44,8 @@ body {
 .logo {
   font-size: 1.5rem;
   font-weight: bold;
+  text-decoration: none;
+  color: white;
 }
 
 .nav-list {
@@ -72,13 +80,22 @@ body {
 .btn-primary {
   background: #e74c3c;
   color: white;
+  text-decoration: none;
 }
 
 .btn-primary:hover {
   background: #c0392b;
 }
 
-/* Hero section */
+.cart-count {
+  background: #ff4444;
+  color: white;
+  border-radius: 50%;
+  padding: 2px 6px;
+  font-size: 0.8em;
+  margin-left: 5px;
+}
+
 .hero {
   background: #ecf0f1;
   padding: 8rem 0 4rem;
@@ -96,41 +113,15 @@ body {
   color: #666;
 }
 
-/* Categories */
-.categories {
+.products {
   padding: 4rem 0;
+  background: #f8f9fa;
 }
 
 .section-title {
   text-align: center;
   margin-bottom: 3rem;
   font-size: 2rem;
-}
-
-.categories-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 2rem;
-}
-
-.category-card {
-  background: #f8f9fa;
-  padding: 2rem;
-  text-align: center;
-  border-radius: 8px;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  cursor: pointer;
-}
-
-.category-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-}
-
-/* Products */
-.products {
-  padding: 4rem 0;
-  background: #f8f9fa;
 }
 
 .products-grid {
@@ -146,7 +137,7 @@ body {
   text-align: center;
   box-shadow: 0 2px 10px rgba(0,0,0,0.1);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
-  overflow: hidden; /* Додано для запобігання виходу контенту */
+  overflow: hidden;
 }
 
 .product-card:hover {
@@ -154,7 +145,6 @@ body {
   box-shadow: 0 10px 20px rgba(0,0,0,0.15);
 }
 
-/* Оновлені стилі для контейнера зображення */
 .product-image {
   background: #ecf0f1;
   height: 250px;
@@ -164,21 +154,19 @@ body {
   align-items: center;
   justify-content: center;
   color: #7f8c8d;
-  overflow: hidden; /* Запобігає виходу зображення за межі контейнера */
-  position: relative; /* Для позиціонування внутрішнього контенту */
+  overflow: hidden;
+  position: relative;
 }
 
-/* Стилі для самого зображення всередині контейнера */
 .product-image img {
-  width: 100%; /* Займає всю ширину контейнера */
-  height: 100%; /* Займає всю висоту контейнера */
-  object-fit: cover; /* Зберігає пропорції, повністю поміщаючи зображення */
-  transition: transform 0.3s ease; /* Плавна анімація при наведенні */
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
 }
 
-/* Ефект при наведенні на картку товару */
 .product-card:hover .product-image img {
-  transform: scale(1.01); /* Легке збільшення при наведенні */
+  transform: scale(1.01);
 }
 
 .product-title {
@@ -191,9 +179,21 @@ body {
   font-size: 1.3rem;
   font-weight: bold;
   margin-top: 1rem;
+  margin-bottom: 15px;
 }
 
-/* Features */
+.add-to-cart {
+  background: #007bff;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 10px;
+  width: 100%;
+  margin-bottom: 15px;
+}
+
 .features {
   padding: 4rem 0;
 }
@@ -209,7 +209,6 @@ body {
   padding: 2rem;
 }
 
-/* Footer */
 .footer {
   background: #2c3e50;
   color: white;
@@ -244,38 +243,386 @@ body {
   color: #e74c3c;
 }
 
-/* Адаптивність для мобільних пристроїв */
+/* Модальное окно товара */
+.product-modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 10000;
+}
+
+.product-modal.show .modal-overlay {
+  opacity: 1;
+}
+
+.product-modal.show .modal-content {
+  transform: translate(-50%, -50%) scale(1);
+  opacity: 1;
+}
+
+.modal-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.modal-content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0.9);
+  width: 90%;
+  max-width: 900px;
+  max-height: 90vh;
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+  opacity: 0;
+  transition: all 0.3s ease;
+  display: flex;
+  flex-direction: column;
+}
+
+.modal-close {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  width: 40px;
+  height: 40px;
+  border: none;
+  background: rgba(0, 0, 0, 0.7);
+  color: white;
+  border-radius: 50%;
+  font-size: 24px;
+  cursor: pointer;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s;
+}
+
+.modal-close:hover {
+  background: rgba(0, 0, 0, 0.9);
+}
+
+.modal-body {
+  flex: 1;
+  overflow-y: auto;
+  padding: 30px;
+}
+
+/* Содержимое модального окна */
+.modal-product {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  align-items: start;
+}
+
 @media (max-width: 768px) {
-  .header-content {
-    flex-direction: column;
-    gap: 1rem;
+  .modal-product {
+    grid-template-columns: 1fr;
+    gap: 20px;
   }
 
-  .nav-list {
-    gap: 1rem;
-  }
-
-  .hero-title {
-    font-size: 2rem;
-  }
-
-  .product-image {
-    height: 150px;
-  }
-
-  .products-grid {
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 1rem;
+  .modal-content {
+    width: 95%;
+    max-height: 95vh;
   }
 }
 
-@media (max-width: 480px) {
-  .product-image {
-    height: 120px; /* Ще менша висота для маленьких екранів */
-  }
+.modal-product-image {
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
 
-  .categories-grid,
-  .products-grid {
-    grid-template-columns: 1fr; /* Одна колонка на дуже маленьких екранах */
+.modal-product-image img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.modal-product-header {
+  margin-bottom: 20px;
+}
+
+.modal-category {
+  display: inline-block;
+  background: #f0f0f0;
+  color: #666;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 14px;
+  margin-bottom: 10px;
+}
+
+.modal-product-title {
+  font-size: 28px;
+  margin: 0 0 15px;
+  color: #333;
+  line-height: 1.3;
+}
+
+.modal-product-price {
+  font-size: 32px;
+  font-weight: bold;
+  color: #007bff;
+  margin-bottom: 20px;
+}
+
+.modal-product-description {
+  margin-bottom: 30px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #eee;
+}
+
+.modal-product-description p {
+  margin: 0;
+  line-height: 1.6;
+  color: #555;
+}
+
+.modal-size-selection {
+  margin-bottom: 30px;
+}
+
+.modal-size-selection h3 {
+  margin-bottom: 15px;
+  font-size: 18px;
+  color: #333;
+}
+
+.modal-size-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.modal-size-option {
+  min-width: 50px;
+  height: 50px;
+  border: 2px solid #ddd;
+  background: white;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 15px;
+}
+
+.modal-size-option:hover {
+  border-color: #007bff;
+  background: #f0f8ff;
+}
+
+.modal-size-option.selected {
+  border-color: #007bff;
+  background: #007bff;
+  color: white;
+}
+
+/* Кнопка добавления в модальном окне */
+.modal-product-actions {
+  margin: 30px 0;
+}
+
+.btn-large {
+  width: 100%;
+  padding: 18px 25px;
+  font-size: 18px;
+  font-weight: 500;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.btn-text {
+  flex: 1;
+  text-align: left;
+}
+
+.btn-price {
+  background: rgba(255, 255, 255, 0.2);
+  padding: 6px 15px;
+  border-radius: 20px;
+  font-weight: 600;
+}
+
+/* Детали товара в модальном окне */
+.modal-product-features {
+  margin-top: 30px;
+  padding-top: 20px;
+  border-top: 1px solid #eee;
+}
+
+.modal-product-features h4 {
+  margin-bottom: 15px;
+  color: #333;
+}
+
+.modal-features-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.modal-features-list li {
+  padding: 8px 0;
+  color: #555;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.modal-features-list li:last-child {
+  border-bottom: none;
+}
+
+.modal-features-list strong {
+  color: #333;
+  min-width: 140px;
+  display: inline-block;
+}
+
+/* Анимации */
+@keyframes slideIn {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
   }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideOut {
+  from {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+}
+
+/* Карточка товара (обновленная) */
+.product-card {
+  cursor: pointer;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.product-card:hover {
+  transform: translateY(-5px);
+}
+
+.btn-view {
+  padding: 10px 20px;
+  font-weight: 500;
+  transition: background 0.2s;
+}
+
+.btn-view:hover {
+  background: #0056b3;
+}
+
+/* Уведомления */
+.notification {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  padding: 15px 20px;
+  background: #4CAF50;
+  color: white;
+  border-radius: 5px;
+  z-index: 10001;
+  animation: slideIn 0.3s ease;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  max-width: 300px;
+}
+
+.notification-error {
+  background: #f44336;
+}
+
+.size-selection {
+  margin: 15px 0;
+}
+
+.size-label {
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 10px;
+  color: #333;
+}
+
+.size-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: center
+}
+
+.size-option {
+  position: relative;
+  cursor: pointer;
+}
+
+.size-input {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.size-value {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border: 2px solid #e0e0e0;
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #666;
+  transition: all 0.3s ease;
+  background-color: white;
+}
+
+.size-input:checked + .size-value {
+  border-color: #ff6b35;
+  background-color: #ff6b35;
+  color: white;
+  transform: scale(1.05);
+}
+
+.size-input:hover + .size-value {
+  border-color: #ff6b35;
+  background-color: #fff8f5;
+}
+
+/* Стили для заблокированной кнопки */
+.add-to-cart:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  background-color: #ccc;
+}
+
+.add-to-cart:disabled:hover {
+  background-color: #ccc;
 }

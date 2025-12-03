@@ -1,0 +1,122 @@
+<!doctype html>
+<html class="no-js" lang="uk">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Style - Інтернет-магазин взуття</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/order.css">
+  <meta name="description" content="Інтернет-магазин взуття Style - кращі ціни на брендове взуття">
+
+  <meta property="og:title" content="Style - Інтернет-магазин взуття">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="">
+  <meta property="og:image" content="">
+  <meta property="og:image:alt" content="Style">
+
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" href="/icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="icon.png">
+
+  <link rel="manifest" href="site.webmanifest">
+  <meta name="theme-color" content="#fafafa">
+</head>
+
+<body>
+
+<!-- Header -->
+<header class="header">
+  <div class="container">
+    <div class="header-content">
+      <a class="logo" href="index.html">Style</a>
+
+      <div class="header-actions">
+        <a href="order.html" class="btn btn-primary" id="cartButton">
+          Кошик <span id="cartCount" class="cart-count">0</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!--<a href="index.html" class="btn btn-secondary">Повернутися до покупок</a>-->
+<section class="order-form-section">
+  <div class="container">
+    <h2 class="section-title">Оформлення замовлення</h2>
+    <div class="order-container">
+      <div class="cart-summary">
+        <h3>Ваше замовлення</h3>
+        <div id="orderCartItems" class="order-cart-items">
+          <!-- Тут будуть товари -->
+        </div>
+        <div class="order-total">
+          <h4>Загальна сума: <span id="orderTotalAmount">0</span> ₴</h4>
+        </div>
+      </div>
+
+      <div class="order-form-wrapper">
+        <form id="orderForm" class="order-form">
+          <h3>Контактна інформація</h3>
+          <div class="form-group">
+            <label for="name">ПIБ *</label>
+            <input type="text" id="name" name="name" placeholder="Мальцев Артем Володимирович / Maltsev Artem Volodimirovich" required>
+            <div class="error-message" id="nameError"></div>
+          </div>
+          <div class="form-group">
+            <label for="phone">Номер телефону *</label>
+            <input type="tel" id="phone" name="phone" placeholder="+380 XX XXX XX XX" required>
+            <div class="error-message" id="phoneError"></div>
+          </div>
+          <div class="form-group">
+            <label for="address">Адрес *</label>
+            <input type="text" id="address" name="address" placeholder="Одеса, Корольова 76б" required>
+            <div class="error-message" id="addressError"></div>
+          </div>
+          <div class="form-agreement">
+            <input type="checkbox" id="agreement" name="agreement" required>
+            <label for="agreement">Я погоджуюсь з умовами обробки персональних даних *</label>
+            <div class="error-message" id="agreementError"></div>
+          </div>
+          <div class="form-actions">
+            <button type="submit" class="btn btn-primary btn-submit">Підтвердити замовлення</button>
+            <button type="button" class="btn btn-secondary" id="clearForm">Очистити форму</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-content">
+      <div class="footer-section">
+        <h3>Style</h3>
+        <p>Інтернет-магазин взуття №1 в Україні</p>
+      </div>
+
+      <div class="footer-section">
+        <h3>Контакти</h3>
+        <ul class="footer-links">
+          <li><a href="#">+380 44 123 4567</a></li>
+          <li><a href="#">info@Style.ua</a></li>
+          <li><a href="#">Одеса, вул. Мальцева, 1</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-section">
+        <h3>Соціальні мережі</h3>
+        <ul class="footer-links">
+          <li><a href="#">Facebook</a></li>
+          <li><a href="#">Instagram</a></li>
+          <li><a href="#">Telegram</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</footer>
+<script src="js/order.js" type="module"></script>
+</body>
+
+</html>
